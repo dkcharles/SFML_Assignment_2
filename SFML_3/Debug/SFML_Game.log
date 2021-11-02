@@ -1,0 +1,3 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SFML_Life.vcxproj, SFML_Points.vcxproj, SFML_Test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  cells.cpp
+  SFML_Game.vcxproj -> D:\OneDrive - Ulster University\_Teaching\2021-2022\COM326\_Practicals\SFML_Assignment_2\Debug\SFML_Life_1.exe
