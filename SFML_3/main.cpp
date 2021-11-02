@@ -70,7 +70,7 @@ int main()
     }
 #pragma endregion  
 
-    while (window.isOpen())                                                    
+    while (window.isOpen())                                                     
     {
 #pragma region ~ Check for a close window event ~
         sf::Event event;                                                // Windows is event driven - this code closes the Window properly
