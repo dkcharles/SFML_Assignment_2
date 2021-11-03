@@ -39,6 +39,8 @@ int main()
     playerSprite.setPosition(sf::Vector2f(winWidth/2, winHeight/2));
     playerSprite.setOrigin(playerSprite.getLocalBounds().width/2, playerSprite.getLocalBounds().height/2);
     playerSprite.setScale(4, 4);
+    playerSprite.setRotation(0);
+    float playerSpeed = 0.1f;
 
     sf::Time elapsed;
 
@@ -69,6 +71,7 @@ int main()
         }
     }
 #pragma endregion  
+    sf::Vector2f NormalisedVectorToMouse;
 
     while (window.isOpen())                                                     
     {
@@ -87,11 +90,17 @@ int main()
         sf::Vector2f mouseWorldPos = window.mapPixelToCoords(mousePixelPos);
 
         sf::Vector2f vectorToMouse = mouseWorldPos - playerSprite.getPosition();
-        float playerRot = playerSprite.getRotation();
-        float angleToMouse = ((atan2(vectorToMouse.y, vectorToMouse.x) *180 / PI_F) + 90 ) - playerRot;
+        float distance = sqrt( (vectorToMouse.x * vectorToMouse.x) + (vectorToMouse.y * vectorToMouse.y) );
+        
+            NormalisedVectorToMouse = sf::Vector2f(vectorToMouse.x / distance, vectorToMouse.y / distance);
 
-        std::cout << angleToMouse << std::endl;
-        // std::cout << vectorToMouse.x << ", " << vectorToMouse.y << std::endl;
+            float playerRot = playerSprite.getRotation();
+            float angleToMouse = atan2(NormalisedVectorToMouse.y, NormalisedVectorToMouse.x) * 180 / PI_F;
+
+            if (distance > 4) playerSprite.setRotation(90 + angleToMouse);
+            if (distance > 16) playerSprite.move(NormalisedVectorToMouse.x * playerSpeed, NormalisedVectorToMouse.y * playerSpeed);
+
+        // std::cout << vectorToMouse.x << ", " << vectorToMouse.y << ", " << NormalisedVectorToMouse.x << ", " << NormalisedVectorToMouse.y << std::endl;
 
         window.clear(sf::Color::White);                                                 
 
