@@ -33,9 +33,10 @@ int main()
 
 #pragma region ~ Randomise the seed for the random number generator so the numbers are different every time ~
     srand(time(NULL));
-    randomiseCells(num_xCells, num_yCells, cellsGrid2D);                        // defined in cells.cpp and cells.h - randomises 2d vector array with 1 and 0s
-#pragma endregion  
-
+    randomiseCells(num_xCells, num_yCells, cellsGrid2D, 2);                        // defined in cells.cpp and cells.h - randomises 2d vector array with 1 and 0s
+#pragma endregion
+    sf::Clock clock;
+    sf::Time elapsedTime;
     while (window.isOpen())                                                     // This is the Windows application loop - infinite loop until closed
     {
 #pragma region ~ Check for a close window event ~
@@ -51,8 +52,11 @@ int main()
 
         // For every row (num_xCells) and column (num_yCells) in our grid (cellsGrid2D) draw a pixel. 
         // Defined in cells.cpp and cells.h. cellsGrid2D is a reference to our 2d array/vector. 
-        drawCells(num_xCells, num_yCells, cellsGrid2D, pixel, window);          
-                                                               
+        drawCells(num_xCells, num_yCells, cellsGrid2D, pixel, window); 
+        elapsedTime = clock.getElapsedTime();
+        if (elapsedTime.asMilliseconds() % 10 == 0) updateCells(num_xCells, num_yCells, cellsGrid2D);
+
+        // std::cout << elapsedTime.asMilliseconds() << std::endl;
         window.display();                                               
     }
 
